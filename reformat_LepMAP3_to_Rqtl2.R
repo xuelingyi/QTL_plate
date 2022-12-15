@@ -2,11 +2,11 @@
 ### folder p2_215_qtl includes the genotypes (by chr) output from the LepMAP3 script map2genotypes.awk 
 
 ## recode genotypes: change 1 to A and 2 to B
-mkdir temp
-for i in {1..21}
-do 
-cat p2_215_qtl/qtldata.LG${i} | sed 's/.*|//g; s/1 1/AA/g; s/1 2/AB/g; s/2 1/BA/g; s/2 2/BB/g' > temp/LG${i}.rqtl
-done
+#mkdir temp
+#for i in {1..21}
+#do 
+#cat p2_215_qtl/qtldata.LG${i} | sed 's/.*|//g; s/1 1/AA/g; s/1 2/AB/g; s/2 1/BA/g; s/2 2/BB/g' > temp/LG${i}.rqtl
+#done
 
 
 #### R script #####
