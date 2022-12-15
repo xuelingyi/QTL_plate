@@ -1,5 +1,5 @@
 #### this script was used to reformat the outputs from LepMAP3 for the Rqtl2 analyses ####
-### folder p2_215_qtl includes the genotypes (by chr) output by the LepMAP3 script map2genotypes.awk 
+### folder p2_215_qtl includes the genotypes (by chr) output from the LepMAP3 script map2genotypes.awk 
 
 ## recode genotypes: change 1 to A and 2 to B
 mkdir temp
@@ -43,6 +43,7 @@ names(gen) = c("marker", "chr", "pos")
 gen$chr = chr
 
 ## the reformated genetic map
+## markers were named by their physical positions
 plateQTL_gmap = gen
 
 
