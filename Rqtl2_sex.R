@@ -1,5 +1,5 @@
 ### QTL mapping on sex (binary trait)
-############# using all 215 individuals ###############
+############# prelinimary analyses using all 215 individuals ###############
 library(qtl2, lib="./")
 
 #Calculating genotype probabilities
@@ -11,15 +11,6 @@ data.name = "qtl_sex"
 map <- insert_pseudomarkers(plate$gmap, step=1)
 #calculate the QTL genotype probabilities,could speed up using multiple cores by adding an argument "cores=x"
 pr <- calc_genoprob(plate, map, error_prob=0.002)
-#Calculate a kinship matrix
-kinship <- calc_kinship(pr)
-# use the “leave one chromosome out” (LOCO) method scan each chromosome using a kinship matrix that is calculated using data from all other chromosomes 
-kinship_loco <- calc_kinship(pr, "loco")
-# to determine the grid of pseudomarkers
-grid <- calc_grid(plate$gmap, step=1)
-# to omit probabilities for positions that are not on the grid
-pr_grid <- probs_to_grid(pr, grid)
-kinship_grid <- calc_kinship(pr_grid)
 
 # Performing a genome scan, the output of scan1() is a matrix of LOD scores, positions × phenotypes.
 out_sex <- scan1(pr, plate$pheno, model="binary")
@@ -39,25 +30,14 @@ save(operm, file=paste0(data.name, ".RData"))
 
 # Finding LOD peaks, identify threshold according to previous plots 
 # peakdrop indicates the amount that the LOD curve must drop below the lowest of two adjacent peaks
-
 find_peaks(out_sex, map, threshold=0.3, peakdrop=1.8, drop=0.1) 
-
-# derive Bayes credible intervals for QTL, for a specific chromosome and LOD score column
-#bayes_int(out_sex, map, chr=7, prob=0.95) 
-
-#estimate QTL effects (in case this is needed)
-#c7eff <- scan1coef(pr[,"7"], plate$pheno)
-#plot_coef(c7eff,map)
-#par(mar=c(4.1, 4.1, 1.1, 2.6), las=1)
-#col <- c("slateblue", "violetred", "green3")
-#plot(c7eff, map["7"], columns=1:2, col=col)
-#last_coef <- unclass(c7eff)[nrow(c7eff),] # pull out last coefficients
-#for(i in seq(along=last_coef))
-#  axis(side=4, at=last_coef[i], names(last_coef)[i], tick=FALSE, col.axis=col[i])
+## outputs:
+## lodindex lodcolumn chr    pos      lod  ci_lo  ci_hi
+#1       Sex  12 11.286 45.58263 10.819 11.754
 
 
 
-############# using the 203 individuals ###################
+############# final: using the 203 individuals ###################
 ## parameter settings were the same when running on the 215 (complete) and 203 (confirmed sex) indiviudals, except for the maxit variable specified below
 
 ### set the inputs
