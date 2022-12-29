@@ -11,7 +11,7 @@
 ### for better clarity in the plate phenotype mapping: 
 # 1 corresponds to the male allele (F1 male is the outbred P. sinensis; replate 1 (A) with S
 # 2 corresponds to the female allele (F1 is the hybrid female of P. sinensis and P. pungitius; replate 2 (B) with P)
-cat sex203/plateQTL_geno_203.csv | sed 's/AA/SS/g; s/AB/SP/g; s/BB/PP/g' > plateQTL_geno_203_SP.csv
+cat plateQTL_geno_203.csv | sed 's/"AA"/"SS"/g; s/"AB"/"SP"/g; s/"BB"/"PP"/g' > plateQTL_geno_203_SP.csv
 
 #### R script #####
 ## extract individual names from the pedigree file so that they have the same order as genotypes
