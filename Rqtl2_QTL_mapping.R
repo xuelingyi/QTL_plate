@@ -4,7 +4,7 @@
 my.trait = "Plateness"
 
 library(qtl2, lib="./")
-data=read_cross2("PlateQTL_203.yaml")
+data=read_cross2("PlateQTL_203_asy.yaml")
 map=insert_pseudomarkers(data$gmap, step=1)
 pr=calc_genoprob(data, map, error_prob=0.002, cores=0)
 out=scan1(genoprobs=pr, pheno=data$pheno[, my.trait], model="binary", cores=0)
@@ -35,10 +35,12 @@ my.trait = "Plateness"
 my.trait = "Width_mean"
 my.covar = c("Sex", "Clutch", "BodyLength_Stained.fish")
 
+my.trait = "Asymmetry_signed"
+my.covar = c("BodyHeight_Stained.fish")
 
 ###### source the same codes below
-library(qtl2, lib="./")
-data=read_cross2("PlateQTL_203.yaml")
+library(qtl2)
+data=read_cross2("PlateQTL_203_asy.yaml")
 map=insert_pseudomarkers(data$gmap, step=1)
 pr=calc_genoprob(data, map, error_prob=0.002, cores=0)
 
