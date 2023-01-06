@@ -5,6 +5,8 @@ The linkage maps were constructed using LepMAP3 (Rastas 2017). All QTL mapping w
 
 
 Citations
+
 Broman, K. W., Gatti, D. M., Simecek, P., Furlotte, N. A., Prins, P., Sen, Ś., ... & Churchill, G. A. (2019). R/qtl2: software for mapping quantitative trait loci with high-dimensional data and multiparent populations. Genetics, 211(2), 495-502.
+
 Rastas, P. (2017). Lep-MAP3: robust linkage mapping even for low-coverage whole genome sequencing data. Bioinformatics, 33(23), 3726-3732.
 
