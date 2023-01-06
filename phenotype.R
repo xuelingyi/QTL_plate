@@ -1,10 +1,10 @@
 ### this script was used for the analyses and transformation of phenotypes 
 
 ## original phenotype measures
-phenotype = read.csv("versions/plateQTL_phenotype_archive.csv")
+phenotype = read.csv("plateQTL_phenotype_archive.csv")
 
 ## transformed phenotypes for qtl mapping (output from the transform and prep step)
-# qtl_pheno = read.csv("qtl_pheno_203.csv") 
+# qtl_pheno = read.csv("qtl_pheno_203_asy.csv") 
 
 library(ggplot2)
 library(ggpubr)
@@ -16,6 +16,7 @@ phenotype$Area_mean = (phenotype$Left_Plate1_Area + phenotype$Right_Plate1_Area)
 phenotype$Height_mean = (phenotype$Left_Plate1_Height + phenotype$Right_Plate1_Height) /2
 phenotype$Width_mean = (phenotype$Left_Plate1_Width + phenotype$Right_Plate1_Width) /2
 phenotype$platedmyomere = (phenotype$PlateMyom.percent_Left + phenotype$PlateMyom.percent_Right) /2
+phenotype$Asymmetry_signed = as.numeric(phenotype$PlateN_Left) - as.numeric(phenotype$PlateN_Right)
 
 ## transform plateN_normal
 phenotype$plate_level = 0.5 #partial-plate
@@ -62,13 +63,13 @@ write.csv(phenotype[!(phenotype$ID %in% sex_id_remove$V1),
                     c("ID", "Clutch", "Sex",
                         "BodyLength_Stained.fish", "BodyHeight_Stained.fish",
                         "Area_mean", "Height_mean", "Width_mean",
-                        "plate_level", "Plateness")],
+                        "plate_level", "Plateness", "Asymmetry_signed")],
           "qtl_pheno_203.csv", row.names = F)
 
 
 ####################################################
 ## transformed phenotypes for qtl mapping (output from the transform and prep step)
-qtl_pheno = read.csv("qtl_pheno_203.csv") 
+qtl_pheno = read.csv("qtl_pheno_203_asy.csv") 
 
 
 ###################### dependency on sex or clutch (categorical) ################
@@ -106,3 +107,6 @@ summary(lm(glm(plate_level ~ as.factor(Sex), data = qtl_pheno)$residuals ~
              BodyLength_Stained.fish + BodyHeight_Stained.fish,
            data = qtl_pheno))
 
+summary(aov(Asymmetry_signed ~ as.factor(Sex) + as.factor(Clutch), data=qtl_pheno))
+summary(lm(Asymmetry_signed ~ BodyLength_Stained.fish + BodyHeight_Stained.fish,
+           data = qtl_pheno))
