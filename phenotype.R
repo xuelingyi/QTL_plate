@@ -18,14 +18,13 @@ phenotype$Width_mean = (phenotype$Left_Plate1_Width + phenotype$Right_Plate1_Wid
 phenotype$platedmyomere = (phenotype$PlateMyom.percent_Left + phenotype$PlateMyom.percent_Right) /2
 phenotype$Asymmetry_signed = as.numeric(phenotype$PlateN_Left) - as.numeric(phenotype$PlateN_Right)
 
-## transform plateN_normal
-phenotype$plate_level = 0.5 #partial-plate
+## transform plateN_binary
+phenotype$plateN_binary = NULL
 for(i in 1:nrow(phenotype)) {
   N = phenotype[i, "plateN_mean"]
-  if(N < 27) {phenotype[i, "plate_level"] = "0"} #low-plate
-  if(N > 33) {phenotype[i, "plate_level"] = "1"} #full-plate
+  if(N <= 30) {phenotype[i, "plateN_binary"] = "0"} #low-plate
+  if(N > 30) {phenotype[i, "plateN_binary"] = "1"} #high-plate
 }
-phenotype$plate_level = as.numeric(phenotype$plate_level)
 
 phenotype$Plateness = NULL
 for (i in 1:nrow(phenotype)) {
@@ -50,6 +49,7 @@ unique(phenotype$Plateness)
 phenotype$Clutch = as.numeric(phenotype$Clutch)
 phenotype$Sex = as.numeric(phenotype$Sex)
 phenotype$Plateness = as.numeric(phenotype$Plateness)
+phenotype$plateN_binary = as.numeric(phenotype$plateN_binary)
 
 
 ## sex does not depend on clutch
@@ -77,6 +77,9 @@ qtl_pheno = read.csv("qtl_pheno_203_asy.csv")
 chisq.test(y=as.factor(qtl_pheno$Sex), x=as.factor(qtl_pheno$Clutch))
 chisq.test(y=as.factor(qtl_pheno$Plateness), x=as.factor(qtl_pheno$Sex))
 chisq.test(y=as.factor(qtl_pheno$Plateness), x=as.factor(qtl_pheno$Clutch))
+chisq.test(y=as.factor(qtl_pheno$plateN_binary), x=as.factor(qtl_pheno$Sex))
+chisq.test(y=as.factor(qtl_pheno$plateN_binary), x=as.factor(qtl_pheno$Clutch))
+
 
 ## numeric dependent variables (body size phenotypes)
 summary(aov(BodyLength_Stained.fish ~ as.factor(Sex) + as.factor(Clutch), data=qtl_pheno))
@@ -99,11 +102,6 @@ summary(lm(Height_mean ~
 
 summary(aov(Width_mean ~ as.factor(Sex) + as.factor(Clutch), data=qtl_pheno))
 summary(lm(glm(Width_mean ~ as.factor(Sex) + as.factor(Clutch), data = qtl_pheno)$residuals ~ 
-             BodyLength_Stained.fish + BodyHeight_Stained.fish,
-           data = qtl_pheno))
-
-summary(aov(plate_level ~ as.factor(Sex) + as.factor(Clutch), data=qtl_pheno))
-summary(lm(glm(plate_level ~ as.factor(Sex), data = qtl_pheno)$residuals ~ 
              BodyLength_Stained.fish + BodyHeight_Stained.fish,
            data = qtl_pheno))
 
