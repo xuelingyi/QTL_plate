@@ -22,8 +22,8 @@ phenotype$Asymmetry_signed = as.numeric(phenotype$PlateN_Left) - as.numeric(phen
 phenotype$plateN_binary = NULL
 for(i in 1:nrow(phenotype)) {
   N = phenotype[i, "plateN_mean"]
-  if(N <= 30) {phenotype[i, "plateN_binary"] = "0"} #low-plate
-  if(N > 30) {phenotype[i, "plateN_binary"] = "1"} #high-plate
+  if(N <= 25) {phenotype[i, "plateN_binary"] = "0"} #low-plate
+  if(N > 25) {phenotype[i, "plateN_binary"] = "1"} #high-plate
 }
 
 phenotype$Plateness = NULL
