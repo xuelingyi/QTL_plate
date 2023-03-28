@@ -90,6 +90,11 @@ summary(aov(BodyHeight_Stained.fish ~ as.factor(Sex) + as.factor(Clutch), data=q
 ## plate phenotypes dependency on sex or clutch (categorical)
 ## then control for significant categorical factors (use residuals) to test additional dependency on body size variables
 
+summary(aov(plateN_mean ~ as.factor(Sex) + as.factor(Clutch), data=qtl_pheno))
+summary(lm(glm(plateN_mean ~ as.factor(Sex), data = qtl_pheno)$residuals ~ 
+             BodyLength_Stained.fish + BodyHeight_Stained.fish,
+           data = qtl_pheno))
+
 summary(aov(Area_mean ~ as.factor(Sex) + as.factor(Clutch), data=qtl_pheno))           
 summary(lm(glm(Area_mean ~ as.factor(Sex), data = qtl_pheno)$residuals ~ 
              BodyLength_Stained.fish + BodyHeight_Stained.fish,
