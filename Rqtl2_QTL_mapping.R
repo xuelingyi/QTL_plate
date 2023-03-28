@@ -1,10 +1,11 @@
 #### These are the r scripts used to conduct QTL mapping on each phenotypic trait (except for sex)
 
-####################### the only binary trait plateness ####################
+####################### binary traits ####################
 my.trait = "Plateness"
+# or my.trait = "plateN_binary"
 
 library(qtl2, lib="./")
-data=read_cross2("PlateQTL_203_asy.yaml")
+data=read_cross2("PlateQTL_203_final.yaml")
 map=insert_pseudomarkers(data$gmap, step=1)
 pr=calc_genoprob(data, map, error_prob=0.002, cores=0)
 out=scan1(genoprobs=pr, pheno=data$pheno[, my.trait], model="binary", cores=0)
@@ -27,7 +28,7 @@ my.covar = c("Sex", "Clutch")
 my.trait = "Height_mean"
 my.covar = c("BodyLength_Stained.fish")
 
-my.trait = "plate_level"
+my.trait = "plateN_mean"
 my.covar = c("Sex")
 
 my.trait = "Plateness"
