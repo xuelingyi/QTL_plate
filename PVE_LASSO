@@ -5,9 +5,9 @@ pmap = read.csv("plateQTL_pmap.csv") # 59629 SNPs
 pmap$pos = as.numeric(format(pmap$pos * 1000000, scientific=F)) # change the unit from megabase to bp
 
 geno203 = read.csv("plateQTL_geno_203_SP.csv")
-genoorder = names(geno203)
-# genoorder = read.table("geno203_order.list")
-genoorder = genoorder[-(1:2),]
+genoorder = as.data.frame(names(geno203))
+# genoorder = read.table("geno203_order.list", header=T)
+genoorder = genoorder[-(1),]
 
 ## make sure snps are in the same order in pamp (rows) and geno (cols)
 pmap$marker = factor(pmap$marker, levels = genoorder)
