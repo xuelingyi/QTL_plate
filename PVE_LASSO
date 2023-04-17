@@ -25,7 +25,7 @@ mylist = list.files("/QTL_range/")
 #[11] "sex203_12_11.286.list"                  "sex203_12_13.623.list"    
 #[13] "Width_mean_17_65.635.list" "Width_mean_19_33.707.list" "Width_mean_20_53.44.list"      
 
-mytraits = names(pheno203)[c(4:10,12)] #no sex, no plateN_binary
+mytraits = names(pheno203)[c(4:8,10,12)] #no binary traits (sex, plateN_binary, Plateness)
 
 for (trait in mytraits) {
   # code nonQTL regions as 0
