@@ -120,6 +120,8 @@ mytraits = c("BodyLength_Stained.fish", "BodyHeight_Stained.fish",
              "Plateness", "plateN_mean", "Asymmetry_signed")
 myPVELG = as.data.frame(NULL)
 
+## NOTE: final run on each trait separately (not in loop)
+
 for (trait in mytraits){
   geno=as.matrix(geno203)
   chr=as.vector(unlist(pmap_QTL[, paste0(trait, "_QTL")]))
