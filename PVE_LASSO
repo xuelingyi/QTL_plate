@@ -111,16 +111,32 @@ geno203 = read.csv("plateQTL_geno_203_SP.csv")
 geno203 = as.data.frame(apply(geno203, 2, function(x){gsub("SS", "-1", x)}))
 geno203 = as.data.frame(apply(geno203, 2, function(x){gsub("SP", "1", x)}))
 geno203 = apply(geno203[, -1], 2, function(x){as.numeric(x)})
-save(geno203, pmap_QTL, pheno203, file="PVELG.RData")
+dim(geno203)
+#[1]   203 59629
+# number of individuals, number of all SNPs
+
+## remove duplicated SNPs (loci having the same genotypes)
+notDuplicated <- !duplicated(sapply(1:ncol(geno203), function(x){
+  paste(geno203[,x],collapse = "")
+}))
+geno203 = geno203[,notDuplicated]
+dim(geno203)
+#[1]  203 2677 (nonduplicated SNPs)
+dim(pmap_QTL)
+#[1] 59629    12
+pmap_QTL = pmap_QTL[notDuplicated,]
+dim(pmap_QTL)
+# [1] 2677   12
+all(colnames(geno203) == pmap_QTL$marker)
+#[1] TRUE
+save(geno203, pmap_QTL, pheno203, file="PVELG_nodup.RData")
 
 
-load("PVELG.RData")
+load("PVELG_nodup.RData")
 mytraits = c("BodyLength_Stained.fish", "BodyHeight_Stained.fish",
              "Area_mean", "Height_mean", "Width_mean",
              "Plateness", "plateN_mean", "Asymmetry_signed")
 myPVELG = as.data.frame(NULL)
-
-## NOTE: final run on each trait separately (not in loop)
 
 for (trait in mytraits){
   geno=as.matrix(geno203)
@@ -143,5 +159,5 @@ for (trait in mytraits){
                         round(sum(PVE$PVE.chro),4))
   myPVELG = rbind(myPVELG, output)
 }
-write.csv(myPVELG, "PVELG_output.csv", row.names = F)
-save(list=ls(pattern = "_PVE"), file="PVELG_outputs.RData")
+write.csv(myPVELG, "PVELG_nodup_output.csv", row.names = F)
+save(list=ls(pattern = "_PVE"), file="PVELG_nodup_outputs.RData")
