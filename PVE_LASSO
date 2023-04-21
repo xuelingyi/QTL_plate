@@ -65,11 +65,14 @@ write.csv(pmap_QTL, "pmap_QTL.csv", row.names = F)
 
 
 library(glmnet)
+#########################
+## codes of the PVELG function was originally provided in Kemppainen, P., Li, Z., Rastas, P., Löytynoja, A., Fang, B., Yang, J., ... & Merilä, J. (2021). Genetic population structure constrains local adaptation in sticklebacks. Molecular Ecology, 30(9), 1946-1961. 
+## the PVELG function was slighly modified here to adapt to our dataset
+#########################
 PVELG <- function(X,y,chromosome){
   #evaluating the narrow sense heritability of the quantitative trait and the percentage of variance (PVE) explained by each  linkage group using the LASSO
   
   #X <- as.matrix(X)
-  ## Ling modified: the original gives error: Error in h(simpleError(msg, call)) : error in evaluating the argument 'x' in selecting a method for function 'as.matrix': invalid class 'NA' to dup_mMatrix_as_dgeMatrix
   X <- data.matrix(X)
   n <- dim(X)[1]
   p <- dim(X)[2]
