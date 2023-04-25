@@ -16,7 +16,6 @@ phenotype$Area_mean = (phenotype$Left_Plate1_Area + phenotype$Right_Plate1_Area)
 phenotype$Height_mean = (phenotype$Left_Plate1_Height + phenotype$Right_Plate1_Height) /2
 phenotype$Width_mean = (phenotype$Left_Plate1_Width + phenotype$Right_Plate1_Width) /2
 phenotype$platedmyomere = (phenotype$PlateMyom.percent_Left + phenotype$PlateMyom.percent_Right) /2
-phenotype$Asymmetry_signed = as.numeric(phenotype$PlateN_Left) - as.numeric(phenotype$PlateN_Right)
 
 ## transform plateN_binary
 phenotype$plateN_binary = NULL
