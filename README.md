@@ -1,5 +1,5 @@
 # QTL_sticklebacks_backcross
-The R scripts used for the QTL analyses on the backcross Pungitius sticklebacks. 
+The R scripts used for the QTL analyses on the backcross Pungitius sticklebacks. "Heterogeneous genomic architecture of skeletal armour traits in sticklebacks"
 
 The linkage maps were constructed using LepMAP3 (Rastas 2017). All QTL mapping was conducted using the R package R/qtl2 (Broman et al 2019).
 
