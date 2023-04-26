@@ -112,3 +112,35 @@ summary(lm(glm(Width_mean ~ as.factor(Sex) + as.factor(Clutch), data = qtl_pheno
 summary(aov(Asymmetry_signed ~ as.factor(Sex) + as.factor(Clutch), data=qtl_pheno))
 summary(lm(Asymmetry_signed ~ BodyLength_Stained.fish + BodyHeight_Stained.fish,
            data = qtl_pheno))
+
+############# check distribution #############
+png("versions/figure/distribution_final.png", width = 8, height = 9, units = "in", res=600)
+pdf("distribution_final.pdf", width = 8, height = 9)
+par(mfrow=c(4,4))
+for (trait in c("Length", "Height")) {
+  my.data = phenotype[, paste0("Body", trait, "_Stained.fish")]
+  hist(my.data, main = paste0("Body ", trait),
+       xlab=NULL)
+  qqnorm(my.data, pch = 1, frame = FALSE, xlab=paste0("Body ", trait))
+  qqline(my.data, col = "steelblue", lwd = 2)
+}
+hist(phenotype$plateN_mean, main = "plate number mean",
+     xlab=NULL)
+qqnorm(phenotype$plateN_mean, pch = 1, frame = FALSE,xlab="plate number mean")
+qqline(phenotype$plateN_mean, col = "steelblue", lwd = 2)
+hist(phenotype$platedmyomere, main = "mean proportion of\nplated myomere",
+     xlab=NULL)
+qqnorm(phenotype$platedmyomere, pch = 1, frame = FALSE,xlab="mean proportion of\nplated myomere")
+qqline(phenotype$platedmyomere, col = "steelblue", lwd = 2)
+hist(phenotype$plate_level, main = "plate level", xlab=NULL)
+qqnorm(phenotype$plate_level, pch = 1, frame = FALSE,xlab="plate level")
+qqline(phenotype$plate_level, col = "steelblue", lwd = 2)
+for (trait in c("Area", "Height", "Width")) {
+  hist(phenotype[, paste0(trait, "_mean")], 
+       xlab=NULL, main=paste0("Plate1_", trait, "_mean"))
+  qqnorm(phenotype[, paste0(trait, "_mean")], pch = 1, frame = FALSE,
+         xlab=paste0("Plate1_", trait, "_mean"))
+  qqline(phenotype[, paste0(trait, "_mean")], col = "steelblue", lwd = 2)
+}
+dev.off()
+par()
