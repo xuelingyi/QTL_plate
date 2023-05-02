@@ -3,9 +3,7 @@ The R scripts used for the QTL analyses on the backcross Pungitius sticklebacks.
 
 The linkage maps were constructed using LepMAP3 (Rastas 2017). All QTL mapping was conducted using the R package R/qtl2 (Broman et al 2019). The Lasso regression method was modified from Kemppainen et al. (2021) thanks to the help of Dr. Kemppainen (https://github.com/petrikemppainen).
 
-The zipped Data folder contained input files for these analyses, including: the pedigree, the transformed phenotypes (qtl_pheno_203_final.csv), the formatted genotypes (plateQTL_geno_203_SP.csv), the genetic map (plateQTL_gmap.csv), the physical map (plateQTL_pmap.csv), and the R/qtl2 control file (PlateQTL_203_final.yaml). 
- 
-  
+Input data and files for these analyses can be found in the Dryad archive for this work (link to add).
   
 Citations
 
