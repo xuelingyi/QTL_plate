@@ -144,3 +144,37 @@ for (trait in c("Area", "Height", "Width")) {
 }
 dev.off()
 par()
+
+######################### sexual dimorphism #################################
+pheno203 = read.csv("qtl_pheno_203_final.csv")
+pheno203$Sex = as.factor(pheno203$Sex)
+library(plotrix)
+
+## sexual dimorphism in body size
+t.test(pheno203[pheno203$Sex == "0", "BodyLength_Stained.fish"],
+       pheno203[pheno203$Sex == "1", "BodyLength_Stained.fish"])
+t.test(pheno203[pheno203$Sex == "0", "BodyHeight_Stained.fish"],
+       pheno203[pheno203$Sex == "1", "BodyHeight_Stained.fish"])
+
+## sexual dimorphism in plate number and size
+t.test(pheno203[pheno203$Sex == "1", "plateN_mean"], 
+       pheno203[pheno203$Sex == "0", "plateN_mean"])
+t.test(pheno203[pheno203$Sex == "1", "Area_mean"], 
+       pheno203[pheno203$Sex == "0", "Area_mean"])
+
+## control for body length
+pheno203$residual = lm(plateN_mean ~ BodyLength_Stained.fish, data = pheno203)$residuals
+t.test(pheno203[pheno203$Sex == "1", "residual"], 
+       pheno203[pheno203$Sex == "0", "residual"])
+
+pheno203$residual = lm(Area_mean ~ BodyLength_Stained.fish, data = pheno203)$residuals
+t.test(pheno203[pheno203$Sex == "1", "residual"], 
+       pheno203[pheno203$Sex == "0", "residual"])
+
+
+
+
+
+
+
+
