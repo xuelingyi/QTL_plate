@@ -1,7 +1,15 @@
 # QTL_sticklebacks_backcross
-The R scripts used for the QTL analyses on the backcross Pungitius sticklebacks. Please cite these codes using DOI: 10.5281/zenodo.11559306. The related study "Heterogeneous genomic architecture of skeletal armour traits in sticklebacks" will be published in the Journal of Evolutionary Biology (link to add).
+The R scripts used for the QTL analyses on the backcross Pungitius sticklebacks. Please cite these codes using the Zenodo DOI: 10.5281/zenodo.11559306. The related study "Heterogeneous genomic architecture of skeletal armour traits in sticklebacks" will be published in the Journal of Evolutionary Biology (link to add).
 
-The linkage maps were constructed using LepMAP3 (Rastas 2017). All QTL mapping was conducted using the R package R/qtl2 (Broman et al 2019). The Lasso regression method was modified from Kemppainen et al. (2021) thanks to the help of Dr. Kemppainen (https://github.com/petrikemppainen).
+phenotype.R: This script includes the analyses (e.g., correlation) and transformation of phenotypes.
+
+reformat_LepMAP3_to_Rqtl2.R: This script reformat the outputs from LepMAP3 (Rastas 2017) for the Rqtl2 (Broman et al 2019) analyses.
+
+Rqtl2_sex.R: This script is the QTL analyses on the binary trait sex. 
+
+Rqtl2_QTL_mapping.R: This script is the QTL analyses on all the ohter phenotypic traits. 
+
+PVE_LASSO.R: This is the Lasso regression used to esitmate heritabilities. The method was modified from Kemppainen et al. (2021; https://doi.org/10.1111/MEC.15808) and was co-written by Dr. Petri Kemppainen (https://github.com/petrikemppainen).
 
 Input data and files for these analyses can be found in the Dryad archive for this work (link to add).
   
