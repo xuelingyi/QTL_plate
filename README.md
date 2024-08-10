@@ -1,5 +1,7 @@
 # QTL_sticklebacks_backcross
-The R scripts used for the QTL analyses on the backcross Pungitius sticklebacks. Please cite these codes using the Zenodo DOI: 10.5281/zenodo.11559306. The related study "Heterogeneous genomic architecture of skeletal armour traits in sticklebacks" will be published in the Journal of Evolutionary Biology (link to add).
+The R scripts used for the QTL analyses on the backcross Pungitius sticklebacks in the following study:
+Xueling Yi, Petri Kemppainen, Kerry Reid, Ying Chen, Pasi Rastas, Antoine Fraimout, Juha Merilä, Heterogeneous genomic architecture of skeletal armour traits in sticklebacks, Journal of Evolutionary Biology, 2024; voae083, https://doi.org/10.1093/jeb/voae083
+Please cite these codes using the Zenodo DOI: 10.5281/zenodo.11559306.
 
 phenotype.R: This script includes the analyses (e.g., correlation) and transformation of phenotypes.
 
